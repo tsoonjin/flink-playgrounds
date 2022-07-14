@@ -53,3 +53,10 @@ services:
       FLINK_JOBMANAGER_HOST: jobmanager
       ZOOKEEPER_CONNECT: zookeeper
       KAFKA_BOOTSTRAP: kafka
+  kafka-log-producer:
+    build:
+      context: ./
+      dockerfile: dockerfiles/Dockerfile.python
+    depends_on:
+      - kafka
+      - jobmanager

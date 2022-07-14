@@ -1,0 +1,9 @@
+FROM python:3.9.5
+ENV REFRESHED_AT 2021-08-15
+
+
+WORKDIR /home
+COPY ./bin/ /home/bin/
+COPY ./requirements.txt /home
+COPY ./data/ /home/data/
+RUN pip install -r requirements.txt
