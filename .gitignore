@@ -7,3 +7,4 @@
 **/hbase-fat.jar
 **/hbase-1.4.13-bin.tar.gz
 **/*output*
+*.csv
