@@ -8,6 +8,7 @@ import csv
 import json
 import sys
 import time
+from datetime import datetime
 from dateutil.parser import parse
 from confluent_kafka import Producer
 import socket
@@ -52,7 +53,8 @@ def main():
                 timestamp, value = line1[0], line1[0]
                 # Convert csv columns to key value pair
                 result = {}
-                result[timestamp] = value
+                result["ts"] = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f").isoformat(timespec='milliseconds') + 'Z'
+                result["msg"] = value
                 # Convert dict to json as message format
                 jresult = json.dumps(result)
                 firstline = False
@@ -68,7 +70,8 @@ def main():
                 time.sleep(5.0)
                 timestamp, value = line[0], line[1]
                 result = {}
-                result[timestamp] = value
+                result["ts"] = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f").isoformat(timespec='milliseconds') + 'Z'
+                result["msg"] = value
                 jresult = json.dumps(result)
 
                 print("Msg len", len(value))
